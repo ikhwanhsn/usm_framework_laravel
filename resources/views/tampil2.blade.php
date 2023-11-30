@@ -10,7 +10,7 @@
     <center>
         <h1 class="mt-5">Data Mahasiswa</h1>
     </center>
-    <section class="w-50 mx-auto mt-4">
+    <section class="mx-auto mt-4 w-50">
         <table class="table table-hover">
             <thead class="table-light">
                 <tr>

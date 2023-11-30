@@ -19,19 +19,28 @@ class Controller1 extends Controller {
     }
 
     public function edit(Request $request){
-        if($data = Mahasiswa::find($request->nim)){
-            $data->nama = @$request->nama;
-            $data->alamat = @$request->alamat;
-            $data->created_at = date('Y-m-d H:i:s');
-            $data->updated_at = date('Y-m-d H:i:s');
+        $data = Mahasiswa::find($request->nim);
+    
+        if($data){
+            $data->nama = $request->nama;
+            $data->alamat = $request->alamat;
+            $data->updated_at = now(); // Menggunakan helper now() untuk mendapatkan waktu saat ini
             $data->save();
-            return redirect('/read')->with('pesan', 'data dengan NIM : '.$request->nim.'berhasil diupdate');
+            
+            return redirect('/read')->with('pesan', 'Data dengan NIM: ' . $request->nim . ' berhasil diupdate');
         } else {
-            return redirect('/read')->with('pesan', 'data tidak ditemukan/gagal diupdate');
+            return redirect('/read')->with('pesan', 'Data tidak ditemukan/gagal diupdate');
         }
     }
+    
 
     public function save(Request $request){
+        $validatedData = $request->validate([
+            'nim' => 'required|regex:/^G\d{3}.\d{2}.\d{4}$/|unique:mahasiswa,nim',
+            'nama' => 'required|string|max:25',
+            'alamat' => 'required|min:6'
+        ]);
+
         $model = new Mahasiswa();
         $model->nim = $request->nim;
         $model->nama = $request->nama;

@@ -14,6 +14,15 @@
                 {{session('status')}}
             </div>
         @endif
+        @if($errors->any())
+            <div style="color:red;">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="text-center card-header font-weight-bold">
                 Create Data Mahasiswa

@@ -28,7 +28,7 @@
                 Create Data Mahasiswa
             </div>
             <div class="card-body">
-                <form name="add-blog-post-form" id="add-blog-post-form" method="post" action="{{url('save')}}">
+                <form name="add-blog-post-form" id="add-blog-post-form" method="post" enctype="multipart/form-data" action="{{url('save')}}">
                     @csrf
                     <div class="form-group">
                         NIM
@@ -37,6 +37,10 @@
                     <div class="form-group">
                         NAMA
                         <input type="text" name="nama" id="nama" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        FOTO PROFIL
+                        <input type="file" name="foto_profil" id="foto_profil" class="form-control"  accept="image/*">
                     </div>
                     <div class="form-group">
                         ALAMAT

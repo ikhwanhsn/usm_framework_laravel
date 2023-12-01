@@ -38,16 +38,23 @@ class Controller1 extends Controller {
         $validatedData = $request->validate([
             'nim' => 'required|regex:/^G\d{3}.\d{2}.\d{4}$/|unique:mahasiswa,nim',
             'nama' => 'required|string|max:25',
-            'alamat' => 'required|min:6'
+            'alamat' => 'required|min:6',
+            'foto_profil' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $file = $request->file('foto_profil');
+        $filename = $file->getClientOriginalName();
+        $path = $file->storeAs('public/foto_profil', $filename);
+        
+        // Menyimpan nama file di database
         $model = new Mahasiswa();
         $model->nim = $request->nim;
         $model->nama = $request->nama;
         $model->alamat = $request->alamat;
+        $model->foto_profil = $filename; // Menyimpan nama file
         $model->save();
-    
-        return view('view', ['data' => $request->all()]);
+
+        return view('view', ['data' => $request->all(), 'foto_profil' => $filename]);
     }    
 
     public function read(){

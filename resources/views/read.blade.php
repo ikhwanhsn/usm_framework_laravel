@@ -21,6 +21,7 @@
                         <th>#</th>
                         <th>NIM</th>
                         <th>NAMA</th>
+                        <th>PROFIL</th>
                         <th>ALAMAT</th>
                         <th>CREATED AT</th>
                         <th>UPDATED AT</th>
@@ -42,7 +43,9 @@
                         echo "</td>";
                         echo "<td>";
                         echo $datax->nama;
+                        // storage\app\public\foto_profil\C84_Q3_Ikhwan.png
                         echo "</td>";
+                        echo "<td><img src='" . asset("storage/foto_profil/{$datax->foto_profil}") . "' alt='{$datax->foto_profil}' style='max-width:100px;'></td>";
                         echo "<td>";
                         echo $datax->alamat;
                         echo "</td>";
